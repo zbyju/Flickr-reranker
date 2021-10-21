@@ -5,9 +5,10 @@ import { ChakraProvider, HStack, SimpleGrid } from "@chakra-ui/react"
 import SearchForm from './components/SearchForm';
 import ResultList from './components/ResultList';
 import ResultListReranked from './components/ResultListReranked';
+import { RawPhoto } from './types/photo';
 
 function App() {
-  const photosState = useState<Array<any>>([]);
+  const photosState = useState<Array<RawPhoto>>([]);
 
   return (
     <div className="App">

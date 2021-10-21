@@ -1,9 +1,14 @@
 import { Button, Heading, HStack, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import fetchSearch from "../api/fetch";
+import { RawPhoto } from "../types/photo";
 
-const FlickerForm = (props: any) => {
-    const [photos, setPhotos] = props.photosState
+interface FlickerFormProps {
+    photosState: [RawPhoto[], React.Dispatch<React.SetStateAction<RawPhoto[]>>]
+}
+
+const FlickerForm = ({photosState}: FlickerFormProps) => {
+    const [photos, setPhotos] = photosState
     const [query, setQuery] = useState("");
 
     const searchClicked = async () => {
