@@ -6,7 +6,8 @@ const ResultList = () => {
             <VStack p="3" h="100%" w="100%"
                     borderRight="1px"
                     boxShadow="lg"
-                    borderColor="gray.300">
+                    borderColor="gray.300"
+                    borderRadius="lg">
                 <Heading alignSelf="start">Results:</Heading>
             </VStack>
         </>

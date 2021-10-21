@@ -6,7 +6,7 @@ const FlickerForm = () => {
             <Heading size="lg">Flickr Search:</Heading>
             <HStack>
                 <Input placeholder="Search on flickr..." />
-                <Button>Search</Button>
+                <Button colorScheme="blue">Search</Button>
             </HStack>
         </>
     );

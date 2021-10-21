@@ -15,7 +15,7 @@ const RerankingForm = () => {
             <GPS />
 
 
-            <Button>Apply</Button>
+            <Button colorScheme="blue">Apply</Button>
         </>
     );
 }
