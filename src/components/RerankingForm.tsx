@@ -1,4 +1,4 @@
-import { Button, Divider, Heading, Input } from "@chakra-ui/react";
+import { Button, Heading } from "@chakra-ui/react";
 import Author from "./FormFields/Author";
 import GPS from "./FormFields/GPS";
 import ImageResolution from "./FormFields/ImageResolution";

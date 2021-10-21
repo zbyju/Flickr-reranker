@@ -1,4 +1,4 @@
-import { Box, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
+import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 const WeightSlider = () => {
