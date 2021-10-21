@@ -5,7 +5,7 @@ const Author = () => {
     return (
         <>
             <Heading size="sm" alignSelf="flex-start">Author</Heading>
-            <Input placeholder="Author name" />
+            <Input placeholder="Author's name" />
             <WeightSlider />
         </>
     );
