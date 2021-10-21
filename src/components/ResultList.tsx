@@ -1,23 +1,20 @@
-import { Box, Heading, VStack, Image } from "@chakra-ui/react";
+import { Heading, VStack } from "@chakra-ui/react";
+import ResultImage from "./ResultImage";
 
 const ResultList = (props: any) => {
-    const [photos, setPhotos] = props.photosState
+    const [photos] = props.photosState
     console.log(photos) 
     return (
         <>
-            <VStack p="3" h="100%" w="100%"
+            <VStack h="100%" w="100%"
                     borderRight="1px"
                     boxShadow="lg"
                     borderColor="gray.300"
-                    borderRadius="0 25px 25px 0">
-                <Heading alignSelf="start">Results:</Heading>
-                {photos.map((photo: any, index: number) => {
-                    return (
-                        <Box key={index}>
-                            <Image src={photo.url_z} alt="Test" />
-                        </Box>
-                    )
-                })}
+                    borderRadius="0 25px 25px 0"
+                    spacing={0}
+                >
+                <Heading p={3} alignSelf="start">Results:</Heading>
+                {photos.map((photo: any, index: number) => <ResultImage key={index} photo={photo} index={index} /> )}
             </VStack>
         </>
     );
