@@ -8,7 +8,7 @@ const SearchForm = () => {
             <VStack border="1px"
                     boxShadow="lg"
                     borderColor="gray.400"
-                    borderRadius="lg"
+                    borderRadius="0 25px 25px 0"
                     p="4" h="100%"
                     minW="300px">
                 <FlickerForm />

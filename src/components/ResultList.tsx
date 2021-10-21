@@ -7,7 +7,7 @@ const ResultList = () => {
                     borderRight="1px"
                     boxShadow="lg"
                     borderColor="gray.300"
-                    borderRadius="lg">
+                    borderRadius="0 25px 25px 0">
                 <Heading alignSelf="start">Results:</Heading>
             </VStack>
         </>
