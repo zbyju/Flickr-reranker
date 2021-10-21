@@ -1,0 +1,16 @@
+import { VStack } from "@chakra-ui/react";
+import FlickerForm from "./FlickerForm";
+import RerankingForm from "./RerankingForm";
+
+const SearchForm = () => {
+    return (
+        <>
+            <VStack border="1px" boxShadow="lg" borderColor="gray.300" p="4" h="100%">
+                <FlickerForm />
+                <RerankingForm />
+            </VStack>
+        </>
+    );
+}
+ 
+export default SearchForm;
