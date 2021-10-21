@@ -1,16 +1,18 @@
-import { Button, Heading, Input } from "@chakra-ui/react";
+import { Button, Divider, Heading, Input } from "@chakra-ui/react";
+import Author from "./FormFields/Author";
+import GPS from "./FormFields/GPS";
+import ImageResolution from "./FormFields/ImageResolution";
+import Date from "./FormFields/Date";
 
 const RerankingForm = () => {
     return (
         <>
             <Heading size="lg">Reranking form:</Heading>
 
-            <Input placeholder="Author name" />
-            <Input placeholder="Image width" />
-            <Input placeholder="Image height" />
-            <Input placeholder="Taken on (date)" />
-            <Input placeholder="GPS x" />
-            <Input placeholder="GPS y" />
+            <Author />
+            <ImageResolution />
+            <Date />
+            <GPS />
 
 
             <Button>Apply</Button>
