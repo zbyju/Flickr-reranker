@@ -1,5 +1,6 @@
-import { VStack, HStack, Image, Text, Box } from "@chakra-ui/react";
+import { VStack, HStack, Image, Box } from "@chakra-ui/react";
 import { RawPhoto } from "../types/photo";
+import ImageDesc from "./ImageDesc";
 
 interface ResultImageProps {
     photo: RawPhoto,
@@ -21,75 +22,13 @@ const ResultImage = ({photo, index}: ResultImageProps) => {
             <VStack w="190px" minW="190px" h="100%" justify="flex-start" spacing={0}
                 borderRight="1px" borderColor="gray.400"
                 bg="blue.50">
-                <Box
-                    px={2} py={1}
-                    w="100%"
-                    borderBottom="1px"
-                    borderColor="blue.100"
-                    style={{borderCollapse: "collapse"}}
-                    _hover={{
-                        background: "rgb(225, 238, 250)"
-                    }}
-                    transition="0.3s all"
-                >
-                    <Text>{index + 1}.</Text>
-                </Box>
+                
+                <ImageDesc title="Rank" label={(index + 1).toString()} />
+                <ImageDesc title="Name" label={photo.title} />
+                <ImageDesc title="Resolution" label={`${photo.width_z}x${photo.height_z}`} />
+                <ImageDesc title="Geo" label={`${photo.latitude}x${photo.longitude}`} />
+                <ImageDesc title="Date" label={`${photo.datetaken}`} />
 
-                <Box
-                    px={2} py={1}
-                    w="100%"
-                    borderBottom="1px"
-                    borderColor="blue.100"
-                    style={{borderCollapse: "collapse"}}
-                    _hover={{
-                        background: "rgb(225, 238, 250)"
-                    }}
-                    transition="0.3s all"
-                >
-                    <Text>{photo.title}</Text>
-                </Box>
-
-                <Box
-                    px={2} py={1}
-                    w="100%"
-                    borderBottom="1px"
-                    borderColor="blue.100"
-                    style={{borderCollapse: "collapse"}}
-                    _hover={{
-                        background: "rgb(225, 238, 250)"
-                    }}
-                    transition="0.3s all"
-                >
-                    <Text>{photo.width_z}x{photo.height_z}</Text>
-                </Box>
-
-                <Box
-                    px={2} py={1}
-                    w="100%"
-                    borderBottom="1px"
-                    borderColor="blue.100"
-                    style={{borderCollapse: "collapse"}}
-                    _hover={{
-                        background: "rgb(225, 238, 250)"
-                    }}
-                    transition="0.3s all"
-                >
-                    <Text>{photo.latitude}, {photo.longitude}</Text>
-                </Box>
-
-                <Box
-                    px={2} py={1}
-                    w="100%"
-                    borderBottom="1px"
-                    borderColor="blue.100"
-                    style={{borderCollapse: "collapse"}}
-                    _hover={{
-                        background: "rgb(225, 238, 250)"
-                    }}
-                    transition="0.3s all"
-                >
-                    <Text>{photo.datetaken}</Text>
-                </Box>
             </VStack>
 
             <Box flexGrow={1}>
