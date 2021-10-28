@@ -1,5 +1,6 @@
 {
     "API_BASE_URL": "https://www.flickr.com/services/rest/",
     "API_KEY": "",
-    "API_SECRET": ""
+    "API_SECRET": "",
+    "MAP_API_KEY": ""
 }

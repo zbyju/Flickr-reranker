@@ -10,6 +10,7 @@ interface MapProps {
 }
 
 const Map = ({zoom, locationState}: MapProps) => {
+    const config = require("../../config.json")
     const [location, setLocation] = locationState
     const center = useMemo(() => location, [])
 
@@ -25,7 +26,7 @@ const Map = ({zoom, locationState}: MapProps) => {
     return (
         <>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyAr1Cd-tIiziDjOAZHHNLtNw0g6gw_Rh0c" }}
+                bootstrapURLKeys={{ key: config.MAP_API_KEY }}
                 defaultCenter={center}
                 defaultZoom={zoom}
                 onClick={mapClicked}
