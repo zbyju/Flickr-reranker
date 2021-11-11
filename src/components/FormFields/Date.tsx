@@ -10,7 +10,8 @@ const Date = () => {
         <>
             <Heading size="sm" alignSelf="flex-start">Date</Heading>
             <DatePicker
-                onChange={(val:any) => {setStartDate(moment(val))}}
+                onChange={(val:any) => {val ? setStartDate(moment(val)) : setStartDate(null)}}
+                value={startDate ? startDate.toDate() : null}
                 format="dd.MM.y"
             />
             <WeightSlider />
