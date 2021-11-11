@@ -1,11 +1,18 @@
-import { Heading, Input } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import WeightSlider from "./WeightSlider";
+import DatePicker from "react-date-picker";
+import { useState } from "react";
+import moment from 'moment'
 
 const Date = () => {
+    const [startDate, setStartDate] = useState<moment.Moment | null>(null);
     return (
         <>
             <Heading size="sm" alignSelf="flex-start">Date</Heading>
-            <Input placeholder="Taken on (date)" />
+            <DatePicker
+                onChange={(val:any) => {setStartDate(moment(val))}}
+                format="dd.MM.y"
+            />
             <WeightSlider />
         </>
     );
