@@ -1,14 +1,14 @@
 import { Heading, Input } from "@chakra-ui/react";
 import WeightSlider from "./WeightSlider";
 
-const Author = () => {
+const Title = () => {
     return (
         <>
-            <Heading size="sm" alignSelf="flex-start">Author</Heading>
-            <Input placeholder="Author's name" />
+            <Heading size="sm" alignSelf="flex-start">Title</Heading>
+            <Input placeholder="Title" />
             <WeightSlider />
         </>
     );
 }
  
-export default Author;
+export default Title;

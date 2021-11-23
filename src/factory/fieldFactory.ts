@@ -1,17 +1,17 @@
-import { AuthorField, DateTakenField, GPSField, ResolutionField } from "../types/fields"
+import { TitleField, DateTakenField, GPSField, ResolutionField } from "../types/fields"
 
-export const getDefaultAuthorForm = (): AuthorField => {
+export const getDefaultTitleField = (): TitleField => {
     return { data: null, weight: 100 }
 }
 
-export const getDefaultDateTakenForm = (): DateTakenField => {
+export const getDefaultDateTakenField = (): DateTakenField => {
     return { data: null, weight: 100 }
 }
 
-export const getDefaultResolutionForm = (): ResolutionField => {
+export const getDefaultResolutionField = (): ResolutionField => {
     return { data: null, weight: 100 }
 }
 
-export const getDefaultGPSForm = (): GPSField => {
+export const getDefaultGPSField = (): GPSField => {
     return { data: null, weight: 100 }
 }

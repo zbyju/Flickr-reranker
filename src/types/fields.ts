@@ -1,5 +1,5 @@
 export interface RerankForm {
-    authorField: AuthorField
+    titleField: TitleField
     resolutionField: ResolutionField
     dateTakenField: DateTakenField
     gpsField: GPSField
@@ -14,7 +14,7 @@ export type Resolution = {
     width: number
     height: number
 }
-export type Author = string
+export type Title = string
 export type DateTaken = Date
 export type GPS = {
     latitude: number
@@ -24,8 +24,8 @@ export type GPS = {
 export interface ResolutionField extends FormField<Resolution> {
     data: Resolution | null
 }
-export interface AuthorField extends FormField<Author> {
-    data: Author | null
+export interface TitleField extends FormField<Title> {
+    data: Title | null
 }
 export interface DateTakenField extends FormField<DateTaken> {
     data: DateTaken | null

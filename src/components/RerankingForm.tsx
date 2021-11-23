@@ -1,5 +1,5 @@
 import { Button, Heading } from "@chakra-ui/react";
-import Author from "./FormFields/Author";
+import Title from "./FormFields/Title";
 import GPS from "./FormFields/GPS";
 import ImageResolution from "./FormFields/ImageResolution";
 import Date from "./FormFields/Date";
@@ -9,7 +9,7 @@ const RerankingForm = () => {
         <>
             <Heading size="lg">Reranking form:</Heading>
 
-            <Author />
+            <Title />
             <ImageResolution />
             <Date />
             <GPS />

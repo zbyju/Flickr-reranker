@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { getDefaultAuthorForm, getDefaultDateTakenForm, getDefaultGPSForm, getDefaultResolutionForm } from "../factory/fieldFactory"
-import { AuthorField, DateTakenField, GPSField, ResolutionField } from "../types/fields"
+import { getDefaultTitleField, getDefaultDateTakenField, getDefaultGPSField, getDefaultResolutionField } from "../factory/fieldFactory"
+import { TitleField, DateTakenField, GPSField, ResolutionField } from "../types/fields"
 import { RawPhoto, RerankedPhoto } from "../types/photo"
 
 export default class Store {
-    private authorState: [AuthorField, React.Dispatch<React.SetStateAction<AuthorField>>]
+    private titleState: [TitleField, React.Dispatch<React.SetStateAction<TitleField>>]
     private resolutionState: [ResolutionField, React.Dispatch<React.SetStateAction<ResolutionField>>]
     private dateTakenState: [DateTakenField, React.Dispatch<React.SetStateAction<DateTakenField>>]
     private gpsState: [GPSField, React.Dispatch<React.SetStateAction<GPSField>>]
@@ -14,17 +14,17 @@ export default class Store {
 
     //Init fields
     constructor() {
-        this.authorState = useState<AuthorField>(getDefaultAuthorForm())
-        this.resolutionState = useState<ResolutionField>(getDefaultResolutionForm())
-        this.dateTakenState = useState<DateTakenField>(getDefaultDateTakenForm())
-        this.gpsState = useState<GPSField>(getDefaultGPSForm())
+        this.titleState = useState<TitleField>(getDefaultTitleField())
+        this.resolutionState = useState<ResolutionField>(getDefaultResolutionField())
+        this.dateTakenState = useState<DateTakenField>(getDefaultDateTakenField())
+        this.gpsState = useState<GPSField>(getDefaultGPSField())
         this.photos = useState<Array<RawPhoto>>([])
         this.rerankedPhotos = useState<Array<RerankedPhoto>>([])
     }
 
     //Getters, setters
-    getAuthor()                          {return this.authorState[0];}
-    setAuthor(newAuthor: AuthorField)     {this.authorState[1](newAuthor)}
+    getTitle()                          {return this.titleState[0];}
+    setTitle(newTitle: TitleField)     {this.titleState[1](newTitle)}
     getResolution()                      {return this.resolutionState[0];}
     setResolution(newRes: ResolutionField){this.resolutionState[1](newRes)}
     getDateTaken()                       {return this.dateTakenState[0];}
@@ -44,9 +44,9 @@ export default class Store {
         this.setPhotos([])
     }
     resetForm() {
-        this.setAuthor(getDefaultAuthorForm())
-        this.setResolution(getDefaultResolutionForm())
-        this.setDateTaken(getDefaultDateTakenForm())
-        this.setGPS(getDefaultGPSForm())
+        this.setTitle(getDefaultTitleField())
+        this.setResolution(getDefaultResolutionField())
+        this.setDateTaken(getDefaultDateTakenField())
+        this.setGPS(getDefaultGPSField())
     }
 }
