@@ -1,3 +1,16 @@
+import { RerankForm } from "./fields";
+
+export interface RerankMeta {
+    oldRank: number
+    newRank: number
+    rerankForm: RerankForm
+}
+
+export interface RerankedPhoto {
+    photo: RawPhoto
+    rerankMeta: RerankMeta
+}
+
 export interface RawPhoto {
     accuracy: string
     context: number
