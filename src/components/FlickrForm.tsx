@@ -1,18 +1,28 @@
 import { Button, Heading, HStack, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { ChangeEvent, EventHandler, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import fetchSearch from "../api/fetch";
+import { updatePhotos } from "../redux/actions/photoActions";
+import { updateSearch } from "../redux/actions/searchFormActions";
+import { RootState } from "../redux/reducers";
+import { RawPhoto } from "../types/photo";
 
 interface FlickrFormProps {
 }
 
 const FlickrForm = ({}: FlickrFormProps) => {
-    const [query, setQuery] = useState("");
+    const dispatch = useDispatch()
+    const searchTerm = useSelector((state: RootState) => state.searchForm)
+
+    const dispatchPhotos = (photos: Array<RawPhoto>) => dispatch(updatePhotos(photos)) 
 
     const searchClicked = async () => {
         try {
-            const ret = await fetchSearch(query)
+            const ret = await fetchSearch(searchTerm)
+            dispatchPhotos(ret.photos.photo)
         } catch(err) { console.log(err) }
     }
+    const dispatchSearchTerm: any = (event: ChangeEvent<HTMLInputElement>) => dispatch(updateSearch(event.target.value))
 
     return (
         <>
@@ -20,7 +30,7 @@ const FlickrForm = ({}: FlickrFormProps) => {
             <HStack>
                 <Input
                     placeholder="Search on flickr..."
-                    onChange={(event) => setQuery(event.target.value)}
+                    onChange={dispatchSearchTerm}
                 />
                 <Button colorScheme="blue"
                 onClick={searchClicked}>Search</Button>
