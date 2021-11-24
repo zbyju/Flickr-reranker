@@ -1,6 +1,9 @@
 import { Heading, VStack } from "@chakra-ui/react";
 
-const ResultList = () => {
+interface ResultListRerankedProps {
+}
+
+const ResultListReranked = ({}: ResultListRerankedProps) => {
     return (
         <>
             <VStack p="3" h="100%" w="100%">
@@ -10,4 +13,4 @@ const ResultList = () => {
     );
 }
  
-export default ResultList;
+export default ResultListReranked;

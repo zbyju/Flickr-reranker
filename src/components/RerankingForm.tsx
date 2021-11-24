@@ -4,7 +4,10 @@ import GPS from "./FormFields/GPS";
 import ImageResolution from "./FormFields/ImageResolution";
 import Date from "./FormFields/Date";
 
-const RerankingForm = () => {
+interface RerankingFormProps {
+}
+
+const RerankingForm = ({}: RerankingFormProps) => {
     return (
         <>
             <Heading size="lg">Reranking form:</Heading>

@@ -1,9 +1,14 @@
 import { Heading, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/reducers";
 import ResultImage from "./ResultImage";
 
-const ResultList = (props: any) => {
-    const [photos] = props.photosState
-    console.log(photos) 
+interface ResultListProps {
+}
+
+const ResultList = ({}: ResultListProps) => {
+    const photos = useSelector((state: RootState) => state.photos)
     return (
         <>
             <VStack h="100%" w="100%"
