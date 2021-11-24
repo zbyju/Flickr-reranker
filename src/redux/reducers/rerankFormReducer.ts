@@ -13,7 +13,6 @@ const rerankFormReducer = (state: RerankForm = getDefaultRerankForm(), action: R
         case "UPDATE_GPS":
             return {...state, gpsField: action.payload}
         default:
-            console.error("Unknown action type")
             return state
     }
 }

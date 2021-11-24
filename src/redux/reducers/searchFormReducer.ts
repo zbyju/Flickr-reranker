@@ -5,7 +5,6 @@ const searchFormReducer = (state: string = "", action: SearchFormAction): string
         case "UPDATE_SEARCH":
             return action.payload
         default:
-            console.error("Unknown action type")
             return state
     }
 }
