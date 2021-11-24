@@ -2,10 +2,10 @@ import { Button, Heading, HStack, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import fetchSearch from "../api/fetch";
 
-interface FlickerFormProps {
+interface FlickrFormProps {
 }
 
-const FlickerForm = ({}: FlickerFormProps) => {
+const FlickrForm = ({}: FlickrFormProps) => {
     const [query, setQuery] = useState("");
 
     const searchClicked = async () => {
@@ -29,4 +29,4 @@ const FlickerForm = ({}: FlickerFormProps) => {
     );
 }
  
-export default FlickerForm;
+export default FlickrForm;
