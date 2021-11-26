@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export interface RerankForm {
     titleField: TitleField
     resolutionField: ResolutionField
@@ -15,7 +17,7 @@ export type Resolution = {
     height: number
 }
 export type Title = string
-export type DateTaken = Date
+export type DateTaken = moment.Moment
 export type GPS = {
     latitude: number
     longitude: number
