@@ -1,5 +1,5 @@
-import { DateTakenField, GPSField, ResolutionField, TitleField } from "../../types/fields"
-import { UpdateDateTakenAction, UpdateGPSAction, UpdateResolutionAction, UpdateTitleAction } from "../../types/redux/rerankFormTypes"
+import { DateTakenField, GPSField, RerankForm, ResolutionField, TitleField } from "../../types/fields"
+import { UpdateDateTakenAction, UpdateGPSAction, UpdateRerankFormAction, UpdateResolutionAction, UpdateTitleAction } from "../../types/redux/rerankFormTypes"
 
 export const updateTitle = (titleField: TitleField): UpdateTitleAction => {
     return {
@@ -26,5 +26,12 @@ export const updateGPS = (gpsField: GPSField): UpdateGPSAction => {
     return {
         type: "UPDATE_GPS",
         payload: gpsField
+    }
+}
+
+export const updateRerankForm = (rerankForm: RerankForm): UpdateRerankFormAction => {
+    return {
+        type: "UPDATE_RERANK_FORM",
+        payload: rerankForm
     }
 }
