@@ -1,4 +1,5 @@
 import { RerankForm } from "./fields";
+import { PhotoScore } from "./reranking";
 
 export interface RerankMeta {
     oldRank: number
@@ -6,9 +7,14 @@ export interface RerankMeta {
     rerankForm: RerankForm
 }
 
-export interface RerankedPhoto {
+export interface ScoredPhoto {
     photo: RawPhoto
-    rerankMeta: RerankMeta
+    scores: PhotoScore
+}
+
+export interface RerankedPhoto extends ScoredPhoto {
+    oldRank: number
+    newRank: number
 }
 
 export interface RawPhoto {

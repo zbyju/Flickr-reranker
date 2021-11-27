@@ -1,5 +1,5 @@
 import { DateTaken, GPSLocation, RerankForm, Resolution, Title } from "../types/fields"
-import { RawPhoto } from "../types/photo"
+import { RawPhoto, ScoredPhoto } from "../types/photo"
 import { PhotoScore, PhotoScores, Score } from "../types/reranking"
 
 export const addUpScore = (score: Score): number => {
@@ -45,6 +45,6 @@ export const calculatePhotoScore = (photo: RawPhoto, rerankForm: RerankForm): Ph
   }
 }
 
-export const sortRerankedPhotos = (a: any, b: any) => {
-  return a.score.value - b.score.value
+export const sortRerankedPhotos = (a: ScoredPhoto, b: ScoredPhoto) => {
+  return a.scores.value - b.scores.value
 }
