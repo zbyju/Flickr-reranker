@@ -18,9 +18,9 @@ export type Resolution = {
 }
 export type Title = string
 export type DateTaken = moment.Moment
-export type GPS = {
-    latitude: number
-    longitude: number
+export interface GPSLocation {
+    lng: number
+    lat: number
 }
 
 export interface ResolutionField extends FormField<Resolution> {
@@ -32,6 +32,6 @@ export interface TitleField extends FormField<Title> {
 export interface DateTakenField extends FormField<DateTaken> {
     data: DateTaken | null
 }
-export interface GPSField extends FormField<GPS> {
-    data: GPS | null
+export interface GPSField extends FormField<GPSLocation> {
+    data: GPSLocation | null
 }
