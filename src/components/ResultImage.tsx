@@ -18,9 +18,9 @@ const ResultImage = ({ photo, index }: ResultImageProps) => {
             justifyContent="space-between"
             spacing={0}
             w="100%"
-            h="300px"
+            h="350px"
         >
-            <VStack w="190px" minW="190px" h="100%" justify="flex-start" spacing={0}
+            <VStack w="190px" minW="200px" h="100%" justify="flex-start" spacing={0}
                 borderRight="1px" borderColor="gray.400"
                 bg="blue.50">
 

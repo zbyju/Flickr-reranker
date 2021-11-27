@@ -20,9 +20,9 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
       justifyContent="space-between"
       spacing={0}
       w="100%"
-      h="300px"
+      h="350px"
     >
-      <VStack w="190px" minW="190px" h="100%" justify="flex-start" spacing={0}
+      <VStack w="190px" minW="225px" h="100%" justify="flex-start" spacing={0}
         borderRight="1px" borderColor="gray.400"
         bg="blue.50">
 
@@ -32,9 +32,9 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
           newRank={rerankedPhoto.newRank}
         />
         <RerankedImageDesc
-          title="Name"
+          title="Title"
           label={rerankedPhoto.photo.title}
-          score={addUpScore(rerankedPhoto.scores.scores.resolution)}
+          score={addUpScore(rerankedPhoto.scores.scores.title)}
         />
         <RerankedImageDesc
           title="Resolution"
@@ -42,14 +42,18 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
           score={addUpScore(rerankedPhoto.scores.scores.resolution)}
         />
         <RerankedImageDesc
-          title="Geo"
+          title="GPS"
           label={`${rerankedPhoto.photo.latitude}x${rerankedPhoto.photo.longitude}`}
-          score={addUpScore(rerankedPhoto.scores.scores.resolution)}
+          score={addUpScore(rerankedPhoto.scores.scores.gps)}
         />
         <RerankedImageDesc
           title="Date"
           label={`${rerankedPhoto.photo.datetaken}`}
-          score={addUpScore(rerankedPhoto.scores.scores.resolution)}
+          score={addUpScore(rerankedPhoto.scores.scores.dateTaken)}
+        />
+        <RerankedImageDesc
+          title="Overall score"
+          label={`${rerankedPhoto.scores.value.toFixed(2)}`}
         />
 
       </VStack>
