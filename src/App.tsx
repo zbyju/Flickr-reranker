@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { ChakraProvider, HStack, SimpleGrid } from "@chakra-ui/react";
 import './App.css';
-import { ChakraProvider, HStack, SimpleGrid } from "@chakra-ui/react"
-
-import SearchForm from './components/SearchForm';
 import ResultList from './components/ResultList';
 import ResultListReranked from './components/ResultListReranked';
+import SearchForm from './components/SearchForm';
+
 
 function App() {
   return (
