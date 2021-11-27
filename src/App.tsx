@@ -11,7 +11,7 @@ function App() {
       <ChakraProvider>
         <HStack minH="100vh" height="100%" minW="100vw" h="1" spacing={0}>
           <SearchForm />
-          <SimpleGrid columns={2} spacing={1} w="100%" h="100%">
+          <SimpleGrid columns={2} w="100%" h="100%">
             <ResultList />
             <ResultListReranked />
           </SimpleGrid>
