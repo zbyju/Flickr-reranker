@@ -1,24 +1,34 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { FormField } from "../../types/fields";
 
-const WeightSlider = () => {
-    const [weight, setWeight] = useState(100);
+interface WeightSliderProps {
+    value: FormField<any>,
+    setValue: any
+}
+
+const WeightSlider = ({ value, setValue }: WeightSliderProps) => {
+    const onSliderChange = (val: number) => {
+        setValue({
+            ...value,
+            weight: val
+        })
+    }
 
     return (
         <>
             <Slider aria-label="slider-ex-1"
-                    defaultValue={weight}
-                    min={0} max={100}
-                    onChange={(val) => setWeight(val)}>
+                defaultValue={value.weight}
+                min={0} max={100}
+                onChange={onSliderChange}>
                 <SliderTrack>
                     <SliderFilledTrack />
                 </SliderTrack>
                 <SliderThumb boxSize={6}>
-                    <Text fontSize="xs" fontWeight="300">{weight}</Text>
+                    <Text fontSize="xs" fontWeight="300">{value.weight}</Text>
                 </SliderThumb>
             </Slider>
         </>
     );
 }
- 
+
 export default WeightSlider;

@@ -1,22 +1,30 @@
 import { Heading } from "@chakra-ui/react";
-import WeightSlider from "./WeightSlider";
+import moment from 'moment';
 import DatePicker from "react-date-picker";
-import { useState } from "react";
-import moment from 'moment'
+import { DateTakenField } from "../../types/fields";
+import WeightSlider from "./WeightSlider";
 
-const Date = () => {
-    const [startDate, setStartDate] = useState<moment.Moment | null>(null);
+interface DateTakenProps {
+    value: DateTakenField,
+    setValue: any
+}
+
+const Date = ({ value, setValue }: DateTakenProps) => {
+    const setDate = (date: Date) => {
+        const dateToSave = date ? moment(date) : null
+        setValue({ ...value, data: dateToSave })
+    }
     return (
         <>
             <Heading size="sm" alignSelf="flex-start">Date</Heading>
             <DatePicker
-                onChange={(val:any) => {val ? setStartDate(moment(val)) : setStartDate(null)}}
-                value={startDate ? startDate.toDate() : null}
+                onChange={setDate}
+                value={value.data ? value.data.toDate() : null}
                 format="dd.MM.y"
             />
-            <WeightSlider />
+            <WeightSlider value={value} setValue={setValue} />
         </>
     );
 }
- 
+
 export default Date;
