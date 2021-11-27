@@ -12,6 +12,8 @@ const rerankFormReducer = (state: RerankForm = getDefaultRerankForm(), action: R
             return {...state, dateTakenField: action.payload}
         case "UPDATE_GPS":
             return {...state, gpsField: action.payload}
+        case "UPDATE_RERANK_FORM":
+            return action.payload
         default:
             return state
     }
