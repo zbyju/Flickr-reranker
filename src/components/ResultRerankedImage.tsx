@@ -1,6 +1,7 @@
 import { Box, HStack, Image, VStack } from "@chakra-ui/react";
 import { addUpScore } from "../logic/reranking";
 import { RerankedPhoto } from "../types/photo";
+import ImageRank from "./ImageRank";
 import RerankedImageDesc from "./RerankedImageDesc";
 
 interface ResultRerankedImageProps {
@@ -25,9 +26,10 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
         borderRight="1px" borderColor="gray.400"
         bg="blue.50">
 
-        <RerankedImageDesc
+        <ImageRank
           title="Rank"
-          label={(index + 1).toString() + " (" + rerankedPhoto.oldRank + " " + rerankedPhoto.newRank + ")"}
+          oldRank={rerankedPhoto.oldRank}
+          newRank={rerankedPhoto.newRank}
         />
         <RerankedImageDesc
           title="Name"
