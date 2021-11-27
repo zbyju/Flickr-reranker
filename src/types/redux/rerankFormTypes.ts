@@ -1,4 +1,4 @@
-import { TitleField, ResolutionField, DateTakenField, GPSField } from "../fields"
+import { DateTakenField, GPSField, RerankForm, ResolutionField, TitleField } from "../fields"
 
 export type UpdateTitleAction = {
     type: "UPDATE_TITLE",
@@ -17,4 +17,9 @@ export type UpdateGPSAction = {
     payload: GPSField
 }
 
-export type RerankFormAction = UpdateTitleAction | UpdateResolutionAction | UpdateDateTakenAction | UpdateGPSAction
+export type UpdateRerankFormAction = {
+    type: "UPDATE_RERANK_FORM",
+    payload: RerankForm
+}
+
+export type RerankFormAction = UpdateTitleAction | UpdateResolutionAction | UpdateDateTakenAction | UpdateGPSAction | UpdateRerankFormAction
