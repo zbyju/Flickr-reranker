@@ -19,3 +19,8 @@
 .react-date-picker__inputGroup, .react-date-picker__clear-button {
     border-right: 1px solid var(--chakra-colors-gray-200) !important;
 }
+
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
