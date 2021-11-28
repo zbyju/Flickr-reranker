@@ -1,7 +1,8 @@
+import moment from "moment"
 import { DateTaken, GPSLocation, RerankForm, Resolution, Title } from "../types/fields"
 import { RawPhoto, ScoredPhoto } from "../types/photo"
 import { PhotoScore, PhotoScores, Score } from "../types/reranking"
-import { levenshteinDistanceNormalized } from "./similarity"
+import { dateDistanceNormalized, findMaxTimeDifference, levenshteinDistanceNormalized } from "./similarity"
 
 export const addUpScore = (score: Score): number => {
   return score.value * score.weight
@@ -20,19 +21,24 @@ const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution): numb
   return Math.random()
 }
 
-const calculateDateTakenScore = (photo: RawPhoto, dateTaekn: DateTaken): number => {
-  return Math.random()
+const calculateDateTakenScore = (photo: RawPhoto, formDate: DateTaken, maxTimeDifference: number): number => {
+  return dateDistanceNormalized(moment(photo.datetaken), formDate, maxTimeDifference)
 }
 
 const calculateGPSScore = (photo: RawPhoto, gps: GPSLocation): number => {
   return Math.random()
 }
 
-export const calculatePhotoScore = (photo: RawPhoto, rerankForm: RerankForm): PhotoScore => {
+export const calculatePhotoScore = (photo: RawPhoto, photos: Array<RawPhoto>, rerankForm: RerankForm): PhotoScore => {
   const titleScore = rerankForm.titleField.data ? calculateTitleScore(photo, rerankForm.titleField.data) : 0
-  console.log("1 " + titleScore)
   const resolutionScore = rerankForm.resolutionField.data ? calculateResolutionScore(photo, rerankForm.resolutionField.data) : 0
-  const dateTakenScore = rerankForm.dateTakenField.data ? calculateDateTakenScore(photo, rerankForm.dateTakenField.data) : 0
+
+  let dateTakenScore = 0
+  if(rerankForm.dateTakenField.data !== null) {
+    const maxTimeDifference = findMaxTimeDifference(rerankForm.dateTakenField.data, photos.map(p=>moment(p.datetaken)))
+    dateTakenScore = calculateDateTakenScore(photo, rerankForm.dateTakenField.data, maxTimeDifference)
+  }
+
   const gpsScore = rerankForm.gpsField.data ? calculateGPSScore(photo, rerankForm.gpsField.data) : 0
 
   const scores: PhotoScores = {

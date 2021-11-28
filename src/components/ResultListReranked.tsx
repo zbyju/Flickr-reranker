@@ -11,7 +11,7 @@ const ResultListReranked = () => {
     const rerankPhotos = (): Array<RerankedPhoto> => {
         return photos.map((photo: RawPhoto): ScoredPhoto => {
             return {
-                photo, scores: calculatePhotoScore(photo, rerankForm)
+                photo, scores: calculatePhotoScore(photo, photos, rerankForm)
             }
         }).sort(sortRerankedPhotos).map((scoredPhoto: ScoredPhoto, index: number): RerankedPhoto => {
             return {
