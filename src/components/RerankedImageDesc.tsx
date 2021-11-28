@@ -21,7 +21,7 @@ const RerankedImageDesc = ({ title, score, label }: RerankedImageDescProps) => {
     >
       <Text>
         <b>{title}</b>
-        {score && <i> (Score: {score.toFixed(2)})</i>}
+        {score !== undefined && <i> (Score: {score.toFixed(2)})</i>}
         <b>: </b>
         {label}
       </Text >
