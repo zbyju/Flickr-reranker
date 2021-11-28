@@ -27,8 +27,8 @@ const ResultImage = ({ photo, index }: ResultImageProps) => {
                 <ImageDesc title="Rank" label={(index + 1).toString()} />
                 <ImageDesc title="Name" label={photo.title} />
                 <ImageDesc title="Resolution" label={`${photo.width_z}x${photo.height_z}`} />
-                <ImageDesc title="Geo" label={`${photo.latitude}x${photo.longitude}`} />
                 <ImageDesc title="Date" label={`${photo.datetaken}`} />
+                <ImageDesc title="Geo" label={`${photo.latitude}x${photo.longitude}`} />
 
             </VStack>
 

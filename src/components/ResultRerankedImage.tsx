@@ -42,14 +42,14 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
           score={addUpScore(rerankedPhoto.scores.scores.resolution)}
         />
         <RerankedImageDesc
-          title="GPS"
-          label={`${rerankedPhoto.photo.latitude}x${rerankedPhoto.photo.longitude}`}
-          score={addUpScore(rerankedPhoto.scores.scores.gps)}
-        />
-        <RerankedImageDesc
           title="Date"
           label={`${rerankedPhoto.photo.datetaken}`}
           score={addUpScore(rerankedPhoto.scores.scores.dateTaken)}
+        />
+        <RerankedImageDesc
+          title="GPS"
+          label={`${rerankedPhoto.photo.latitude}x${rerankedPhoto.photo.longitude}`}
+          score={addUpScore(rerankedPhoto.scores.scores.gps)}
         />
         <RerankedImageDesc
           title="Overall score"
