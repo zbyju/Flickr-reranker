@@ -14,7 +14,7 @@ export const addScore = (scores: PhotoScores): number => {
 }
 
 const calculateTitleScore = (photo: RawPhoto, title: Title): number => {
-  return levenshteinDistanceNormalized(photo.title, title)
+  return levenshteinDistanceNormalized(photo.title.toLowerCase(), title.toLowerCase())
 }
 
 const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution): number => {
