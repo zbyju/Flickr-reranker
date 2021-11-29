@@ -2,6 +2,7 @@ import { Button, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDefaultDateTakenField, getDefaultGPSField, getDefaultResolutionField, getDefaultTitleField } from "../factory/formFactory";
+import { setCalculated } from "../redux/actions/calculatedActions";
 import { updateRerankForm } from "../redux/actions/rerankFormActions";
 import { RootState } from "../redux/reducers";
 import { DateTakenField, GPSField, ResolutionField, TitleField } from "../types/fields";
@@ -32,6 +33,7 @@ const RerankingForm = () => {
     }
 
     const applyClicked = () => {
+        dispatch(setCalculated(false))
         dispatch(updateRerankForm({
             titleField,
             resolutionField,

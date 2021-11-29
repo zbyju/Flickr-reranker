@@ -2,6 +2,7 @@ import { Button, Heading, HStack, Input } from "@chakra-ui/react";
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSearch } from "../api/fetch";
+import { setCalculated } from "../redux/actions/calculatedActions";
 import { updatePhotos } from "../redux/actions/photoActions";
 import { updateSearch } from "../redux/actions/searchFormActions";
 import { RootState } from "../redux/reducers";
@@ -14,6 +15,7 @@ const FlickrForm = () => {
     const dispatchPhotos = (photos: Array<RawPhoto>) => dispatch(updatePhotos(photos))
 
     const searchClicked = async () => {
+        dispatch(setCalculated(false))
         dispatchPhotos([])
         try {
             const ret = await fetchSearch(searchTerm)
