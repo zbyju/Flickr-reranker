@@ -1,6 +1,5 @@
 import { RawPhoto, ScoredPhoto } from "../types/photo";
 import { PhotoScore } from "../types/reranking";
-import { getDefaultRerankForm } from "./formFactory";
 
 export const getDefaultPhotoScore = (): PhotoScore => {
     return {
