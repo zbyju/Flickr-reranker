@@ -12,7 +12,7 @@ import Title from "./FormFields/Title";
 
 const RerankingForm = () => {
     const dispatch = useDispatch()
-    const rerankForm = useSelector((state: RootState) => state.rerankForm)
+    const rerankForm = useSelector((state: RootState) => state.rerankForm.rerankForm)
     const [titleField, setTitleField] = useState<TitleField>(getDefaultTitleField())
     const [resolutionField, setResolutionField] = useState<ResolutionField>(getDefaultResolutionField())
     const [dateTakenField, setDateTakenField] = useState<DateTakenField>(getDefaultDateTakenField())

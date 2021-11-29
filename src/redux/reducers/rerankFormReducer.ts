@@ -2,18 +2,32 @@ import { getDefaultRerankForm } from "../../factory/formFactory"
 import { RerankForm } from "../../types/fields"
 import { RerankFormAction } from "../../types/redux/rerankFormTypes"
 
-const rerankFormReducer = (state: RerankForm = getDefaultRerankForm(), action: RerankFormAction): RerankForm => {
+interface RerankFormReducerState {
+    rerankForm: RerankForm
+    previousRerankForm: RerankForm
+}
+
+const defaultState: RerankFormReducerState = {
+    rerankForm: getDefaultRerankForm(),
+    previousRerankForm: getDefaultRerankForm()
+}
+
+const rerankFormReducer = (state: RerankFormReducerState = defaultState, action: RerankFormAction): RerankFormReducerState => {
     switch(action.type) {
         case "UPDATE_TITLE":
-            return {...state, titleField: action.payload}
+            return { rerankForm: {...state.rerankForm, titleField: action.payload},
+                     previousRerankForm: state.rerankForm }
         case "UPDATE_RESOLUTION":
-            return {...state, resolutionField: action.payload}
+            return { rerankForm: {...state.rerankForm, resolutionField: action.payload},
+                     previousRerankForm: state.rerankForm }
         case "UPDATE_DATETAKEN":
-            return {...state, dateTakenField: action.payload}
+            return { rerankForm: {...state.rerankForm, dateTakenField: action.payload},
+                     previousRerankForm: state.rerankForm }
         case "UPDATE_GPS":
-            return {...state, gpsField: action.payload}
+            return { rerankForm: {...state.rerankForm, gpsField: action.payload},
+                     previousRerankForm: state.rerankForm }
         case "UPDATE_RERANK_FORM":
-            return action.payload
+            return { rerankForm: action.payload, previousRerankForm: state.rerankForm }
         default:
             return state
     }
