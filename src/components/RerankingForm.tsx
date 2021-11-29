@@ -5,10 +5,10 @@ import { getDefaultDateTakenField, getDefaultGPSField, getDefaultResolutionField
 import { updateRerankForm } from "../redux/actions/rerankFormActions";
 import { RootState } from "../redux/reducers";
 import { DateTakenField, GPSField, ResolutionField, TitleField } from "../types/fields";
-import Date from "./FormFields/Date";
-import GPS from "./FormFields/GPS";
-import Resolution from "./FormFields/Resolution";
-import Title from "./FormFields/Title";
+import Date from "./formFields/Date";
+import GPS from "./formFields/GPS";
+import Resolution from "./formFields/Resolution";
+import Title from "./formFields/Title";
 
 const RerankingForm = () => {
     const dispatch = useDispatch()
