@@ -6,6 +6,7 @@ import { RootState } from "../redux/reducers";
 import { RawPhoto, RerankedPhoto, ScoredPhoto } from "../types/photo";
 import ResultRerankedImage from "./ResultRerankedImage";
 import { useEffect, useRef, useState } from "react";
+import { calculateScorePhotos, photosToScoredPhotos, scoredPhotosToRankedPhotos } from "../utils/photo";
 
 const ResultListReranked = () => {
     const photos = useSelector((state: RootState) => state.photos)
@@ -17,35 +18,19 @@ const ResultListReranked = () => {
     const photosSynced = useRef(false)
 
     useEffect(() => {
-        const tmpScoredPhotos = photos.map(p => getDefaultScoredPhoto(p))
-        setScoredPhotos(tmpScoredPhotos.map((sp: ScoredPhoto): ScoredPhoto => {
-            return {
-                photo: sp.photo,
-                scores: calculatePhotoScore(sp, photos, rerankForm, previousRerankForm),
-            }
-        }))
+        const tmpScoredPhotos = photosToScoredPhotos(photos)
+        setScoredPhotos(calculateScorePhotos(tmpScoredPhotos, photos, rerankForm, previousRerankForm))
         photosSynced.current = true
     }, [photos])
 
     useEffect(() => {
         if(photosSynced.current) {
-            setScoredPhotos(scoredPhotos.map((sp: ScoredPhoto): ScoredPhoto => {
-                return {
-                    photo: sp.photo,
-                    scores: calculatePhotoScore(sp, photos, rerankForm, previousRerankForm),
-                }
-            }))
+            setScoredPhotos(s => calculateScorePhotos(s, photos, rerankForm, previousRerankForm))
         }
     }, [rerankForm])
 
     useEffect(() => {
-        setRerankedPhotos(scoredPhotos.sort(sortRerankedPhotos).map((sp: ScoredPhoto, index: number): RerankedPhoto => {
-            return {
-                ...sp,
-                oldRank: photos.findIndex((photo: RawPhoto) => photo.id === sp.photo.id) + 1,
-                newRank: index + 1
-            }
-        }))
+        setRerankedPhotos(scoredPhotosToRankedPhotos(scoredPhotos, photos))
     }, [scoredPhotos])
 
     return (
