@@ -14,11 +14,9 @@ const FlickrForm = () => {
     const dispatchPhotos = (photos: Array<RawPhoto>) => dispatch(updatePhotos(photos))
 
     const searchClicked = async () => {
-        console.log("test2")
         dispatchPhotos([])
         try {
             const ret = await fetchSearch(searchTerm)
-            console.log(ret)
             dispatchPhotos(ret)
         } catch (err) { console.log(err) }
     }

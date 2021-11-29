@@ -10,12 +10,10 @@ export const addUpScore = (score: Score): number => {
 }
 
 export const addScore = (scores: PhotoScores): number => {
-  // console.log(scores)
   return addUpScore(scores.title) + addUpScore(scores.resolution) + addUpScore(scores.gps) + addUpScore(scores.dateTaken)
 }
 
 const calculateTitleScore = (photo: RawPhoto, title: Title): number => {
-  console.log("Calculating levenshteinDistance")
   return levenshteinDistanceNormalized(photo.title.toLowerCase(), title.toLowerCase())
 }
 
@@ -32,10 +30,6 @@ const calculateGPSScore = (photo: RawPhoto, gps: GPSLocation): number => {
 }
 
 export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, rerankForm: RerankForm, prevRerankForm: RerankForm): PhotoScore => {
-  console.log(sp.scores.scores.title.value)
-  console.log(prevRerankForm.titleField.data)
-  console.log(rerankForm.titleField.data)
-  console.log(prevRerankForm.titleField.data === rerankForm.titleField.data)
   const titleScore = (prevRerankForm.titleField.data === rerankForm.titleField.data ? sp.scores.scores.title.value :
                       rerankForm.titleField.data ? calculateTitleScore(sp.photo, rerankForm.titleField.data) :
                       0)
