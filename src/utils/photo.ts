@@ -1,6 +1,6 @@
 import { getDefaultScoredPhoto } from "../factory/photo";
 import { calculatePhotoScore, sortRerankedPhotos } from "../logic/reranking";
-import { RerankForm } from "../types/fields";
+import { GPSLocation, RerankForm } from "../types/fields";
 import { RawPhoto, RerankedPhoto, ScoredPhoto } from "../types/photo";
 
 export const photosToScoredPhotos = (photos: Array<RawPhoto>): Array<ScoredPhoto> => {
@@ -29,4 +29,11 @@ export const scoredPhotosToRankedPhotos = (scoredPhotos: Array<ScoredPhoto>, pho
             newRank: index + 1
         }
     })
+}
+
+export const getGPSOfPhoto = (photo: RawPhoto): GPSLocation => {
+    return {
+        lat: parseFloat(photo.latitude),
+        lng: parseFloat(photo.longitude)
+    }
 }

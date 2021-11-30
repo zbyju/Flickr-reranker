@@ -3,7 +3,8 @@ import rerankFormReducer from "../redux/reducers/rerankFormReducer"
 import { DateTaken, GPSLocation, RerankForm, Resolution, Title } from "../types/fields"
 import { RawPhoto, ScoredPhoto } from "../types/photo"
 import { PhotoScore, PhotoScores, Score } from "../types/reranking"
-import { dateDistanceNormalized, findMaxTimeDifference, levenshteinDistanceNormalized } from "./similarity"
+import { getGPSOfPhoto } from "../utils/photo"
+import { dateDistanceNormalized, findMaxGpsDistance, findMaxTimeDifference, gpsDistanceNormalized, levenshteinDistanceNormalized } from "./similarity"
 
 export const addUpScore = (score: Score): number => {
   return score.value * score.weight
@@ -25,8 +26,8 @@ const calculateDateTakenScore = (photo: RawPhoto, formDate: DateTaken, maxTimeDi
   return dateDistanceNormalized(moment(photo.datetaken), formDate, maxTimeDifference)
 }
 
-const calculateGPSScore = (photo: RawPhoto, gps: GPSLocation): number => {
-  return Math.random()
+const calculateGPSScore = (photo: RawPhoto, gps: GPSLocation, maxDistance: number): number => {
+  return gpsDistanceNormalized(getGPSOfPhoto(photo), gps, maxDistance)
 }
 
 export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, rerankForm: RerankForm, prevRerankForm: RerankForm): PhotoScore => {
@@ -44,9 +45,16 @@ export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, re
     dateTakenScore = calculateDateTakenScore(sp.photo, rerankForm.dateTakenField.data, maxTimeDifference)
   }
 
-  const gpsScore = (prevRerankForm.gpsField.data === rerankForm.gpsField.data ? sp.scores.scores.gps.value :
-                    rerankForm.gpsField.data ? calculateGPSScore(sp.photo, rerankForm.gpsField.data) :
-                    0)
+  let gpsScore = 0
+  if(rerankForm.gpsField.data !== null) {
+    if(prevRerankForm.gpsField.data?.lat === rerankForm.gpsField.data.lat &&
+       prevRerankForm.gpsField.data?.lng === rerankForm.gpsField.data.lng) {
+         gpsScore = sp.scores.scores.gps.value
+    } else {
+      const maxDistance = findMaxGpsDistance(rerankForm.gpsField.data, photos.map(p=>getGPSOfPhoto(p)))
+      gpsScore = calculateGPSScore(sp.photo, rerankForm.gpsField.data, maxDistance)
+    }
+  }
 
   const scores: PhotoScores = {
     title: { value: titleScore, weight: rerankForm.titleField.weight },
