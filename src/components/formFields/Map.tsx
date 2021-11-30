@@ -7,14 +7,16 @@ import { GPSLocation } from '../../types/fields';
 interface MapProps {
     zoom: number,
     locationState: [GPSLocation, any]
+    locationChangable?: boolean
 }
 
-const Map = ({ zoom, locationState }: MapProps) => {
+const Map = ({ zoom, locationState, locationChangable }: MapProps) => {
     const config = require("../../config.json")
     const [location, setLocation] = locationState
     const center = useMemo(() => location, [])
 
     const mapClicked = (e: any) => {
+        if(locationChangable === false) return
         const loc = {
             lat: e.lat,
             lng: e.lng
