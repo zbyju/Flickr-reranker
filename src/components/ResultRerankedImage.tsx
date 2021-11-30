@@ -1,7 +1,9 @@
 import { Box, HStack, Image, VStack } from "@chakra-ui/react";
 import { addUpScore } from "../logic/reranking";
 import { RerankedPhoto } from "../types/photo";
+import { getGPSOfPhoto } from "../utils/photo";
 import ImageRank from "./ImageRank";
+import RerankedGPSDesc from "./RerankedGPSDesc";
 import RerankedImageDesc from "./RerankedImageDesc";
 
 interface ResultRerankedImageProps {
@@ -46,9 +48,8 @@ const ResultRerankedImage = ({ rerankedPhoto, index }: ResultRerankedImageProps)
           label={`${rerankedPhoto.photo.datetaken}`}
           score={addUpScore(rerankedPhoto.scores.scores.dateTaken)}
         />
-        <RerankedImageDesc
-          title="GPS"
-          label={`${rerankedPhoto.photo.latitude}x${rerankedPhoto.photo.longitude}`}
+        <RerankedGPSDesc
+          gps={getGPSOfPhoto(rerankedPhoto.photo)}
           score={addUpScore(rerankedPhoto.scores.scores.gps)}
         />
         <RerankedImageDesc

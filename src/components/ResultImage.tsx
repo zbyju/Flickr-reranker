@@ -1,5 +1,7 @@
 import { Box, HStack, Image, VStack } from "@chakra-ui/react";
 import { RawPhoto } from "../types/photo";
+import { getGPSOfPhoto } from "../utils/photo";
+import GPSDesc from "./GPSDesc";
 import ImageDesc from "./ImageDesc";
 
 interface ResultImageProps {
@@ -28,7 +30,7 @@ const ResultImage = ({ photo, index }: ResultImageProps) => {
                 <ImageDesc title="Name" label={photo.title} />
                 <ImageDesc title="Resolution" label={`${photo.width_z}x${photo.height_z}`} />
                 <ImageDesc title="Date" label={`${photo.datetaken}`} />
-                <ImageDesc title="Geo" label={`${photo.latitude}x${photo.longitude}`} />
+                <GPSDesc gps={getGPSOfPhoto(photo)} />
 
             </VStack>
 
