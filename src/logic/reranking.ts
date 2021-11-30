@@ -4,7 +4,7 @@ import { DateTaken, GPSLocation, RerankForm, Resolution, Title } from "../types/
 import { RawPhoto, ScoredPhoto } from "../types/photo"
 import { PhotoScore, PhotoScores, Score } from "../types/reranking"
 import { getGPSOfPhoto } from "../utils/photo"
-import { dateDistanceNormalized, findMaxGpsDistance, findMaxTimeDifference, gpsDistanceNormalized, levenshteinDistanceNormalized } from "./similarity"
+import { dateDistanceNormalized, findMaxGpsDistance, findMaxResolution, findMaxTimeDifference, gpsDistanceNormalized, levenshteinDistanceNormalized } from "./similarity"
 
 export const addUpScore = (score: Score): number => {
   return score.value * score.weight
@@ -18,8 +18,15 @@ const calculateTitleScore = (photo: RawPhoto, title: Title): number => {
   return levenshteinDistanceNormalized(photo.title.toLowerCase(), title.toLowerCase())
 }
 
-const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution): number => {
-  return Math.random()
+const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution, maxes: [number, number]): number => {
+  const diffX = Math.abs(photo.width_z - resolution.width)
+  const diffY = Math.abs(photo.height_z - resolution.height)
+  console.log(diffX)
+  console.log(diffY)
+  console.log(maxes)
+  const scoreX = 1 - (diffX / maxes[0])
+  const scoreY = 1 - (diffY / maxes[1])
+  return (scoreX + scoreY) / 2
 }
 
 const calculateDateTakenScore = (photo: RawPhoto, formDate: DateTaken, maxTimeDifference: number): number => {
@@ -34,9 +41,13 @@ export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, re
   const titleScore = (prevRerankForm.titleField.data === rerankForm.titleField.data ? sp.scores.scores.title.value :
                       rerankForm.titleField.data ? calculateTitleScore(sp.photo, rerankForm.titleField.data) :
                       0)
-  const resolutionScore = (prevRerankForm.resolutionField.data === rerankForm.resolutionField.data ? sp.scores.scores.resolution.value :
-                           rerankForm.resolutionField.data ? calculateResolutionScore(sp.photo, rerankForm.resolutionField.data) :
-                           0)
+  let resolutionScore = 0
+  if(rerankForm.resolutionField.data !== null) {
+    const maxes = findMaxResolution(rerankForm.resolutionField.data, photos.map(p=>{
+      return {width: p.width_z, height: p.height_z}
+    }))
+    resolutionScore = calculateResolutionScore(sp.photo, rerankForm.resolutionField.data, maxes)
+  }
 
   let dateTakenScore = 0
   if(prevRerankForm.dateTakenField.data === rerankForm.dateTakenField.data) dateTakenScore = sp.scores.scores.dateTaken.value

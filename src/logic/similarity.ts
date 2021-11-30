@@ -1,5 +1,5 @@
 import moment from "moment";
-import { GPSLocation } from "../types/fields";
+import { GPSLocation, Resolution } from "../types/fields";
 
 // Code used from https://www.tutorialspoint.com/levenshtein-distance-in-javascript
 const levenshteinDistance = (str1: string, str2: string): number => {
@@ -64,6 +64,19 @@ export const findMaxTimeDifference = (formTime: moment.Moment, times: Array<mome
   return maxTime
 }
 
+export const findMaxResolution = (formRes: Resolution, resolutions: Array<Resolution | null | undefined>): [number, number] => {
+  let maxX = 0
+  let maxY = 0
+  resolutions.forEach(res => {
+    if(res === null || res === undefined) return
+    const diffX = Math.abs(res.width - formRes.width)
+    if(diffX > maxX) maxX = diffX
+    const diffY = Math.abs(res.height - formRes.height)
+    if(diffY > maxY) maxY = diffY
+  })
+  return [maxX, maxY]
+}
+
 export const findMaxGpsDistance = (formGps: GPSLocation, gpses: Array<GPSLocation | null | undefined>): number => {
   let maxDistance = 1
   gpses.forEach(gps => {
@@ -79,7 +92,7 @@ export const dateDistance = (time: moment.Moment, formTime: moment.Moment): numb
 }
 
 export const dateDistanceNormalized = (time: moment.Moment, formTime: moment.Moment, maxTimeDifference: number): number => {
-  const distance = calculateTimeDifference(time, formTime)
+  const distance = dateDistance(time, formTime)
   return 1 - (distance / maxTimeDifference)
 }
 
