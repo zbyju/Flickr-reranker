@@ -1,5 +1,4 @@
 import moment from "moment"
-import rerankFormReducer from "../redux/reducers/rerankFormReducer"
 import { DateTaken, GPSLocation, RerankForm, Resolution, Title } from "../types/fields"
 import { RawPhoto, ScoredPhoto } from "../types/photo"
 import { PhotoScore, PhotoScores, Score } from "../types/reranking"
@@ -21,9 +20,6 @@ const calculateTitleScore = (photo: RawPhoto, title: Title): number => {
 const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution, maxes: [number, number]): number => {
   const diffX = Math.abs(photo.width_z - resolution.width)
   const diffY = Math.abs(photo.height_z - resolution.height)
-  console.log(diffX)
-  console.log(diffY)
-  console.log(maxes)
   const scoreX = 1 - (diffX / maxes[0])
   const scoreY = 1 - (diffY / maxes[1])
   return (scoreX + scoreY) / 2
@@ -42,7 +38,8 @@ export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, re
                       rerankForm.titleField.data ? calculateTitleScore(sp.photo, rerankForm.titleField.data) :
                       0)
   let resolutionScore = 0
-  if(rerankForm.resolutionField.data !== null) {
+  if(prevRerankForm.resolutionField.data === rerankForm.resolutionField.data) resolutionScore = sp.scores.scores.resolution.value
+  else if(rerankForm.resolutionField.data !== null) {
     const maxes = findMaxResolution(rerankForm.resolutionField.data, photos.map(p=>{
       return {width: p.width_z, height: p.height_z}
     }))
@@ -51,7 +48,7 @@ export const calculatePhotoScore = (sp: ScoredPhoto, photos: Array<RawPhoto>, re
 
   let dateTakenScore = 0
   if(prevRerankForm.dateTakenField.data === rerankForm.dateTakenField.data) dateTakenScore = sp.scores.scores.dateTaken.value
-  if(rerankForm.dateTakenField.data !== null) {
+  else if(rerankForm.dateTakenField.data !== null) {
     const maxTimeDifference = findMaxTimeDifference(rerankForm.dateTakenField.data, photos.map(p=>moment(p.datetaken)))
     dateTakenScore = calculateDateTakenScore(sp.photo, rerankForm.dateTakenField.data, maxTimeDifference)
   }
