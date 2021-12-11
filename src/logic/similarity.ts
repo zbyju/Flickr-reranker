@@ -1,26 +1,29 @@
 import moment from "moment";
 import { GPSLocation, Resolution } from "../types/fields";
 
-// Code used from https://www.tutorialspoint.com/levenshtein-distance-in-javascript
 const levenshteinDistance = (str1: string, str2: string): number => {
   const track = Array(str2.length + 1).fill(null).map(() =>
   Array(str1.length + 1).fill(null));
-  for (let i = 0; i <= str1.length; i += 1) {
+
+  for (let i = 0; i <= str1.length; i++) {
       track[0][i] = i;
   }
-  for (let j = 0; j <= str2.length; j += 1) {
+
+  for (let j = 0; j <= str2.length; j++) {
       track[j][0] = j;
   }
-  for (let j = 1; j <= str2.length; j += 1) {
-      for (let i = 1; i <= str1.length; i += 1) {
-        const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1;
+
+  for (let j = 1; j <= str2.length; j++) {
+      for (let i = 1; i <= str1.length; i++) {
+        const tmp = str1[i - 1] === str2[j - 1] ? 0 : 1;
         track[j][i] = Math.min(
-            track[j][i - 1] + 1, // deletion
-            track[j - 1][i] + 1, // insertion
-            track[j - 1][i - 1] + indicator, // substitution
+            track[j][i - 1] + 1,
+            track[j - 1][i] + 1,
+            track[j - 1][i - 1] + tmp,
         );
       }
   }
+
   return track[str2.length][str1.length];
 }
 
@@ -28,19 +31,18 @@ const getRadians = (coordinate: number) => {
   return (coordinate * Math.PI) / 180;
 };
 
-// Code used from https://github.com/lunaticmonk/great-circle-distance/blob/master/greatCircleDistance.js
 export const greatCircleDistance = (gps1: GPSLocation, gps2: GPSLocation): number => {
   const { lat: lat1, lng: lng1 } = gps1;
   const { lat: lat2, lng: lng2 } = gps2;
-  const φ1 = getRadians(lat1);
-  const φ2 = getRadians(lat2);
-  const Δφ = getRadians(lat2 - lat1);
-  const Δλ = getRadians(lng2 - lng1);
-  const a =
-    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const d = 6371e3 * c;
+  const x1 = getRadians(lat1);
+  const x2 = getRadians(lat2);
+  const dx = getRadians(lat2 - lat1);
+  const dy = getRadians(lng2 - lng1);
+  const z =
+    Math.sin(dx / 2) * Math.sin(dx / 2) +
+    Math.cos(x1) * Math.cos(x2) * Math.sin(dy / 2) * Math.sin(dy / 2);
+  const s = 2 * Math.atan2(Math.sqrt(z), Math.sqrt(1 - z));
+  const d = 6371e3 * s;
   return d / 1000;
 }
 
