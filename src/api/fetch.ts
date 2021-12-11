@@ -1,3 +1,4 @@
+import moment from "moment"
 import { mergeFetches } from "../utils/fetching"
 
 export function fetchFlickr(query: string, page: number = 1, perPage: number = 250, hasGeo: boolean = true, sort: string = "relevance", format: string = "json"): Promise<any> {
@@ -14,12 +15,15 @@ export function fetchFlickr(query: string, page: number = 1, perPage: number = 2
 }
 
 export function fetchSearch(query: string): Promise<any> {
+    const numberOfFetches = 1
+    const numberOfPhotos = 250
+    const perPage = numberOfPhotos / numberOfFetches
     return new Promise(async (resolve, reject) => {
         try {
-            const results = await Promise.all([
-                fetchFlickr(query, 1, 100), fetchFlickr(query, 2, 100),fetchFlickr(query, 3, 100), fetchFlickr(query, 4, 100),
-                fetchFlickr(query, 5, 100), fetchFlickr(query, 6, 100),fetchFlickr(query, 7, 100), fetchFlickr(query, 8, 100),
-            ])
+            const before = moment()
+            const results = await Promise.all(Array.from({ length: numberOfFetches }, (v, i) => i).map(x => fetchFlickr(query, x, perPage)))
+            const after = moment()
+            console.log(moment.duration(after.diff(before)).asMilliseconds())
             resolve(mergeFetches(results))
         } catch(err) {
             reject(err)
