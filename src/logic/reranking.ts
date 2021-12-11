@@ -22,7 +22,8 @@ const calculateResolutionScore = (photo: RawPhoto, resolution: Resolution, maxes
   const diffY = Math.abs(photo.height_z - resolution.height)
   const scoreX = 1 - (diffX / maxes[0])
   const scoreY = 1 - (diffY / maxes[1])
-  return (scoreX + scoreY) / 2
+  const result = (scoreX + scoreY) / 2
+  return result ? result : 0
 }
 
 const calculateDateTakenScore = (photo: RawPhoto, formDate: DateTaken, maxTimeDifference: number): number => {
